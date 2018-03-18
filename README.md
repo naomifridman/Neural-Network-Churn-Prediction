@@ -1,6 +1,6 @@
 
 # Neural Network for Churn Prediction
-* The project were written for kaggle competition
+* The project were written for kaggle Churn prediction competition
 * WSDM - KKBox's Churn Prediction Challenge
 * https://www.kaggle.com/c/kkbox-churn-prediction-challenge
 
@@ -23,6 +23,10 @@ from sklearn.metrics import (confusion_matrix, precision_recall_curve, auc,
                              roc_curve, recall_score, classification_report, f1_score,
                              precision_recall_fscore_support)
 ```
+
+    C:\Users\naomi\Anaconda2\lib\site-packages\sklearn\cross_validation.py:41: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. Also note that the interface of the new CV iterators are different from that of this module. This module will be removed in 0.20.
+      "This module will be removed in 0.20.", DeprecationWarning)
+    
 
 ## Read Data
 #### train.csv - the train set, containing the user ids and whether they have churned.
@@ -369,12 +373,8 @@ train.head()
 
 
 ```python
-test.to_csv('test_xgb_0.14343.csv', index=False)
-```
-
-
-```python
-train.to_csv('train_xgb_0.14343.csv', index=False)
+#test.to_csv('test_xgb_0.14343.csv', index=False)
+#train.to_csv('train_xgb_0.14343.csv', index=False)
 ```
 
 # Simple Deep Learning: Feedforward Neural Network
@@ -405,6 +405,12 @@ from keras.models import Sequential
 from keras.layers import Dense, Activation, MaxPooling1D
 
 ```
+
+    Using Theano backend.
+    
+
+    Couldn't import dot_parser, loading of dot files will not be possible.
+    
 
 
 ```python
@@ -477,7 +483,7 @@ def drow_precision(y_true, y_pred):
 
 
 ```python
-def drow_history(history):
+def drow_history_acc(history):
     # list all data in history
     print(history.history.keys())
     # summarize history for accuracy
@@ -488,6 +494,7 @@ def drow_history(history):
     plt.xlabel('epoch')
     plt.legend(['train', 'test'], loc='upper left')
     plt.show()
+def drow_history_loss(history):
     # summarize history for loss
     plt.plot(history.history['loss'])
     plt.plot(history.history['val_loss'])
@@ -531,15 +538,11 @@ model = Sequential()
 model.add(Dense(lsize, input_dim=X_train.shape[1],activation='relu'))
 model.add(BatchNormalization())
 model.add(Dropout(rate=0.25))
-model.add(Dense(lsize/2, activation='relu'))
+model.add(Dense(int(lsize/2), activation='relu'))
 model.add(BatchNormalization())
-#model.add(Dropout(rate=0.25))
-#model.add(Dense(lsize/4, activation='relu'))
 model.add(Dropout(rate=0.25))
-model.add(Dense(lsize/4,kernel_regularizer=regularizers.l2(0.1), activation='relu'))
+model.add(Dense(int(lsize/4),kernel_regularizer=regularizers.l2(0.1), activation='relu'))
 model.add(Dropout(rate=0.1))
-#model.add(Dense(256,kernel_regularizer=regularizers.l2(0.1), activation='relu'))
-#model.add(Dropout(rate=0.1))
 model.add(Dense(1, activation='sigmoid'))
 # Compile model
 model.compile(loss='binary_crossentropy', optimizer='adadelta', metrics=['accuracy'])
@@ -593,41 +596,46 @@ history = model.fit(X_train, y_train, epochs=10, batch_size=1026,#512,
 
     Train on 1256889 samples, validate on 314223 samples
     Epoch 1/10
-     - 40s - loss: 0.7318 - acc: 0.9492 - val_loss: 0.1219 - val_acc: 0.9570
+     - 38s - loss: 0.6891 - acc: 0.9535 - val_loss: 0.1185 - val_acc: 0.9586
     Epoch 2/10
-     - 39s - loss: 0.1196 - acc: 0.9573 - val_loss: 0.1169 - val_acc: 0.9576
+     - 39s - loss: 0.1201 - acc: 0.9572 - val_loss: 0.1146 - val_acc: 0.9586
     Epoch 3/10
-     - 39s - loss: 0.1162 - acc: 0.9577 - val_loss: 0.1251 - val_acc: 0.9498
+     - 39s - loss: 0.1169 - acc: 0.9575 - val_loss: 0.1122 - val_acc: 0.9590
     Epoch 4/10
-     - 38s - loss: 0.1146 - acc: 0.9578 - val_loss: 0.1291 - val_acc: 0.9488
+     - 39s - loss: 0.1152 - acc: 0.9578 - val_loss: 0.1133 - val_acc: 0.9554
     Epoch 5/10
-     - 39s - loss: 0.1133 - acc: 0.9581 - val_loss: 0.1131 - val_acc: 0.9581
+     - 39s - loss: 0.1141 - acc: 0.9579 - val_loss: 0.1100 - val_acc: 0.9596
     Epoch 6/10
-     - 44s - loss: 0.1129 - acc: 0.9582 - val_loss: 0.1127 - val_acc: 0.9580
+     - 39s - loss: 0.1133 - acc: 0.9580 - val_loss: 0.1093 - val_acc: 0.9596
     Epoch 7/10
-     - 48s - loss: 0.1125 - acc: 0.9582 - val_loss: 0.1135 - val_acc: 0.9569
+     - 40s - loss: 0.1130 - acc: 0.9581 - val_loss: 0.1107 - val_acc: 0.9583
     Epoch 8/10
-     - 49s - loss: 0.1122 - acc: 0.9584 - val_loss: 0.1124 - val_acc: 0.9582
+     - 40s - loss: 0.1121 - acc: 0.9583 - val_loss: 0.1085 - val_acc: 0.9596
     Epoch 9/10
-     - 42s - loss: 0.1120 - acc: 0.9584 - val_loss: 0.1121 - val_acc: 0.9581
+     - 40s - loss: 0.1114 - acc: 0.9584 - val_loss: 0.1081 - val_acc: 0.9597
     Epoch 10/10
-     - 40s - loss: 0.1120 - acc: 0.9584 - val_loss: 0.1120 - val_acc: 0.9581
+     - 40s - loss: 0.1115 - acc: 0.9586 - val_loss: 0.1082 - val_acc: 0.9599
     
 
 
 ```python
-drow_history(history)
+drow_history_acc(history)
 ```
 
     ['acc', 'loss', 'val_acc', 'val_loss', 'lr']
     
 
 
-![png](FFNN_churn_predict_0_12174_36_1.png)
+![png](FFNN_churn_predict_0_12174_files/FFNN_churn_predict_0_12174_35_1.png)
 
 
 
-![png](FFNN_churn_predict_0_12174_files/FFNN_churn_predict_0_12174_36_2.png)
+```python
+drow_history_loss(history)
+```
+
+
+![png](FFNN_churn_predict_0_12174_files/FFNN_churn_predict_0_12174_36_0.png)
 
 
 
@@ -637,15 +645,15 @@ y_pred = (predictions > 0.5)
 print_stats(y_val, y_pred)
 ```
 
-    Accuracy: 0.95881, Cohen's Kappa Score: 0.69616
+    Accuracy: 0.95904, Cohen's Kappa Score: 0.68224
     Confusion Matrix:
-    [[355970   6711]
-     [  9468  20630]]
+    [[357559   5055]
+     [ 11035  19130]]
     Classification Report:
                  precision    recall  f1-score   support
     
-              0       0.97      0.98      0.98    362681
-              1       0.75      0.69      0.72     30098
+              0       0.97      0.99      0.98    362614
+              1       0.79      0.63      0.70     30165
     
     avg / total       0.96      0.96      0.96    392779
     

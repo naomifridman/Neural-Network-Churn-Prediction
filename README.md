@@ -623,7 +623,7 @@ drow_history(history)
     
 
 
-![png](FFNN_churn_predict_0_12174_files/FFNN_churn_predict_0_12174_36_1.png)
+![png](FFNN_churn_predict_0_12174_36_1.png)
 
 
 

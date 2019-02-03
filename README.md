@@ -665,7 +665,7 @@ drow_roc_curve(y_val, y_pred)
 ```
 
 
-![png](FFNN_churn_predict_0_12174_files/FFNN_churn_predict_0_12174_38_0.png)
+![png](https://raw.githubusercontent.com/naomifridman//Neural-Network-Churn-Prediction/FFNN_churn_predict_0_12174_files/FFNN_churn_predict_0_12174_38_0.png)
 
 
 

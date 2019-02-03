@@ -626,7 +626,7 @@ drow_history_acc(history)
     
 
 
-![png](FFNN_churn_predict_0_12174_files/FFNN_churn_predict_0_12174_35_1.png)
+![png](ttps://raw.githubusercontent.com/naomifridman/Neural-Network-Churn-Prediction/master/FFNN_churn_predict_0_12174_files/FFNN_churn_predict_0_12174_35_1.png)
 
 
 
@@ -635,7 +635,7 @@ drow_history_loss(history)
 ```
 
 
-![png](FFNN_churn_predict_0_12174_files/FFNN_churn_predict_0_12174_36_0.png)
+![png](ttps://raw.githubusercontent.com/naomifridman/Neural-Network-Churn-Prediction/master/FFNN_churn_predict_0_12174_files/FFNN_churn_predict_0_12174_36_0.png)
 
 
 
@@ -665,7 +665,7 @@ drow_roc_curve(y_val, y_pred)
 ```
 
 
-![png](https://raw.githubusercontent.com/naomifridman//Neural-Network-Churn-Prediction/master/FFNN_churn_predict_0_12174_files/FFNN_churn_predict_0_12174_38_0.png)
+![png](ttps://raw.githubusercontent.com/naomifridman/Neural-Network-Churn-Prediction/master/FFNN_churn_predict_0_12174_files/FFNN_churn_predict_0_12174_38_0.png)
 
 
 
